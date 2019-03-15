@@ -7,29 +7,29 @@
 - Recognize the structure of a method
 - Recognize how to call methods
 - Practice method calls
-- Identify common programming conventions
 
 ## Introduction
 
-_Methods_ are used to bundle one or more activities into a single unit. In daily
-life we do this all the time: "get ready for work" means: "take a shower, walk
-the dog, eat breakfast." But each of _those_ activities are made up of other
-sub-activities, and sub-sub activities.  Take a shower involves steps like "wash
-hair" which itself has steps like "wet head under shower", "apply shampoo", etc.
+_Methods_ are used to bundle one or more activities into a single unit. In
+daily life we do this all the time: "get ready for work" means: "take a shower,
+walk the dog, eat breakfast." But each of _those_ activities are made up of
+other sub-activities, and sub-sub activities.  "Take a shower" involves steps
+like "wash hair" which itself has steps like "wet head under shower", "apply
+shampoo", etc.
 
 Nearly all programming languages have the idea of "bundling up work" under a
 programmer-created name. While different languages might call them
-"subroutines," "methods," or "functions," they all mean the same thing: grouping
-work.
+"subroutines," "methods," or "functions," they all mean the same thing:
+grouping work under a name that _we_ think is appropriate..
 
 In this lesson we'll introduce methods, distinguish them from data types, and
 cover how to create and execute them in your Ruby program.
 
 ## Demonstrate Abstraction With Methods
 
-Methods define a new thing that your program can do. While variables in Ruby store
-data, methods store a new routine or behavior your program can use. Variables
-are like "nouns", a thing, and methods are like "verbs", an action.
+Methods define a new thing that your program can do. While variables in Ruby
+store data, methods store a new routine or behavior your program can use.
+Variables are like "nouns", things, and methods are like "verbs," actions.
 
 For example, imagine needing to say "Hello World!" five times. It could look
 like this:
@@ -42,13 +42,77 @@ puts "Hello World!"
 puts "Hello World!"
 ```
 
-That technically works. You made use of a variable to store the data you wanted
-to output, and then the next five lines output the phrase.
+This meets the requirement alright.  Now imagine that later in your program you
+want to say "Hello World!" five times _again_. We would have to write "Hello
+World!" five more times.
 
-Now imagine later in your program you want to say "Hello World!" five times
-again. We would have to write "Hello World!" five more times.
 
-If we wanted to use a method to contain this actions, it could look like this:
+```ruby
+puts "Hello World!"
+puts "Hello World!"
+puts "Hello World!"
+puts "Hello World!"
+puts "Hello World!"
+
+# Other work here....
+
+puts "Hello World!"
+puts "Hello World!"
+puts "Hello World!"
+puts "Hello World!"
+puts "Hello World!"
+```
+
+But we're repeating the same `String` over and over. Let's put that content as
+variable.
+
+```ruby
+message = "Hello World!"
+puts message
+puts message
+puts message
+puts message
+puts message
+
+# Other work here....
+
+puts message
+puts message
+puts message
+puts message
+puts message
+```
+
+Here we made use of a variable to store the message, and didn't change anything
+else.  You should be able to see here that by doing this our code is easier to
+change. From "Hello World!" we could easily go to "Hola Mundo!" by making _one_
+change versus making _10_ changes.
+
+But all those `puts` appearing multiple times...there's something...that
+bothers our programmer brains about this. It's seeing all that repetition.
+
+![We sense something wrong about this](https://gph.is/2AinZom)
+
+Could we reduce the repetition somehow?
+
+If we created a method to contain this "saying `message` five times action" we
+could get rid of some of that repetition.
+
+Here's the method...
+
+```ruby
+def say_hello_world_five_times
+  message = "Hello World!"
+  puts message
+  puts message
+  puts message
+  puts message
+  puts message
+end
+```
+
+And, once integrated, our code could be much simpler:
+
 
 ```ruby
 def say_hello_world_five_times
@@ -58,44 +122,31 @@ def say_hello_world_five_times
   puts "Hello World!"
   puts "Hello World!"
 end
+
+say_hello_world_five_times
+# other work
+say_hello_world_five_times
+
 ```
 
 Now, when we use the word `say_hello_world_five_times` in our program, it
-will invoke the method, running the code within the method. So the script above,
-saying hello five times, doing other things, then saying hello five times again
-could be rewritten as this:
+will invoke the method, running the code within the method.
 
-```ruby
-def say_hello_world_five_times
-  puts "Hello World!"
-  puts "Hello World!"
-  puts "Hello World!"
-  puts "Hello World!"
-  puts "Hello World!"
-end
-```
-
-This is much cleaner. We _abstracted_ the action or procedure of putting "Hello
-World!" five times into a method.
+This is cleaner. Programmers would say "We _abstracted_ the action, or
+procedure, of `puts`-ing "Hello World!" five times into a method." Later, we'll
+see ways of making this code _even more_ abstract.
 
 ## Define DRY
 
 DRY stand for "Don't Repeat Yourself," a basic principle of software development
 aimed at reducing repetition of information. Less code is good: It saves time
-and effort, is easy to maintain, and also reduces the chances of bugs.
-
-We abstracted the action or procedure of printing "Hello World!" five times into
-a method. By defining the method `say_hello_world_five_times` once, we can
-"call" or "invoke" the method as many times as we want in the future. Let's look
-at methods in greater detail.
+and effort, is easy to maintain, and also reduces the chances of bugs. When we
+see unsophisticated repetition, we want to reach for a form of _abstraction_.
+Creating methods is a common and powerful tool of abstraction.
 
 ## Recognize the Structure of a Method
 
-When we define a method in Ruby, we use the `def` keyword. A method's name should
-begin with any lowercase letter.
-
-This defines a method. It does not use it -- yet: This is the first step so that
-it can be used later.
+Let's put a method's definition here so we can learn its parts:
 
 ```ruby
 def say_hello_world
@@ -103,35 +154,37 @@ def say_hello_world
 end
 ```
 
-The first line of `def say_hello_world` is called the method signature, it
+When we define a method in Ruby, we use the `def` keyword. A method's name
+should begin with a lowercase letter.
+
+The first line of `def say_hello_world` is called the method _signature_, it
 defines the basic properties of the method including the name of the method,
-`greeting`.
+`greeting`. We'll learn more about the other properties later.  The name of a
+method should suggest what it does. If you need multiple words, Rubyists use a
+`_` to separate them. Separating words by underscore (`_`) is called
+_snake-case_ (because the shape looks like the words were swallowed up by a
+snake).
 
 Once you open a method definition with the `def` keyword, all subsequent lines
-in your program are considered the method's body, the actual procedure or code
-that your method will run every time it's called.
+_until_ the method's closing `end` keyword are called the method's _body_ or
+the method's _implementation_. The implementation is the actual code that your
+method will run every time it's called.  It's standard practice to indent the
+body by two spaces.
 
-You must terminate every opening `def` of a method with a corresponding `end` in
-order to close the method body. If you don't correctly `end` a method, your
-program will have unexpected results or break entirely because of a syntax
-error. A good practice is to define the method and then immediately close it
-before programming anything into the method.
+After multiple bits of work (expressions, variables set and looked up, etc.) we
+must provide an `end` keyword.
 
-```ruby
-def greeting
-  # Leave a line break for the method body
-end # Immediately close the method.
-```
-
-Here we set up the method's structure first, ensuring a proper termination
-before adding any other complexity. It's also a great practice to indent methods
-correctly. The body of a method should be indented two (2) spaces, placing it
-visually within the method. When you `end` the method, go back to the same
-indentation of the `def`, aligning the opening and closing of the method
-visually.
-
-Then you can easily define the body of the method and never worry about
-forgetting to `end` the method.
+> **TIP**: A good practice is to define the method and then immediately close
+> it with `end` _before_ writing the _body_. Many expressions in Ruby use
+> `do...end` and it can be confusing to keep them all straight. By creating the
+> `def (name)`...`end` "bookends," we help prevent possible confusion.
+>
+> ```ruby
+> def greeting
+>   # Leave a line break for the method body
+>   # More lines of code would go here
+> end
+> ```
 
 ```ruby
 def greeting
@@ -139,13 +192,16 @@ def greeting
 end
 ```
 
+All this work _defines_ a method. It does not _run_ it &mdash; yet. We must
+_define_ it before we can _use_.  Think of it like writing a recipe: writing
+the recipe does not mean doing the work of preparing the dish. If it were that
+easy, we'd all have much fancier dinners at home!
+
 ## Recognize How to Call Methods
 
-Remember earlier where we defined the method, but it didn't run the work in the
-method yet. Here's where we do that! Once you define a method, you can execute
-the method whenever you want by using the method name in your code. Methods
-should be defined before calling them, otherwise Ruby will raise an exception
-for undefined method invoking.
+We've written the method, let's _call_ it. Once you define a method, you can
+_call_ or _execute_ the method whenever you want by using the method name in
+your code.
 
 ```ruby
 def greeting
@@ -153,17 +209,18 @@ def greeting
 end
 
 greeting # Executing the method by name
-#> "Hello World"
+#=> "Hello World"
 
 greeting # Executing the method again
-#> "Hello World"
+#=> "Hello World"
 ```
 
 ## Practice Method Calls
 
 Let's try it out, step by step. Create a new file called `greeting.rb`. You can
-use: `touch greeting.rb` from your terminal to do so. Paste the following code
-into `greeting.rb`:
+use: `touch greeting.rb` from your terminal to do so. Open up `greeting.rb` in
+your editor and paste the following code
+into it:
 
 ```ruby
 def greeting
@@ -179,8 +236,10 @@ $
 ```
 
 You'll notice that when you run your program, there is no output and nothing
-happens. We successfully defined the method, but never executed it anywhere in
-the code. It's like we screwed in a new lightbulb, but haven't turned it on.
+happens. We successfully _defined_ the method, but never _executed_ or _called_
+it anywhere in the code. It's like we screwed in a new lightbulb, but never
+flipped the switch to "on."
+
 Update the code in `greeting.rb` to read:
 
 ```ruby
@@ -200,7 +259,7 @@ Hello World
 $
 ```
 
-Now your program actually executed the code in the method! Now let's update the
+Now your program _actually executed_ the code in the method! Let's update the
 code in `greeting.rb` again to the following:
 
 ```ruby
@@ -228,26 +287,15 @@ Hello World
 $
 ```
 
-The bareword `greeting` will execute the body of the defined method for each
+The word `greeting` will execute the body of the defined method for each
 time it was called.
-
-## Identify Common Programming Conventions
-
-Programmers love conventions, or agreed upon rules that help them talk to each
-other about code. A common syntax convention for Ruby methods is to preface them
-with a `#`, and in subsequent lessons, you might see methods written with a `#`
-in front of the method name. For example, if a method is named 'greeting',
-rubyists will often refer to it as `#greeting`. This is so that other rubyists
-can instantly recognize it as a method, as opposed to a variable or a bareword
-or a class.  But remember that when you write it in your code, it should be
-`greeting` and not `#greeting`.
 
 ## Conclusion
 
-Methods are a big part of programming in Ruby. We use them to save and perform
-repeatable actions. Knowing how to define and call methods is crucial to
-building programs, as well as your development as a programmer. You'll have to
-use them often, in big or small programs.
+Methods are a big part of programming in Ruby and pretty much _every_ language.
+We use them to save and perform repeatable actions. Knowing how to define and
+call methods is crucial to building programs, as well as your development as a
+programmer. You'll have to use them often, in big or small programs.
 
 ## Resources
 [Ruby Programming/Syntax/Method Calls](https://en.wikibooks.org/wiki/Ruby_Programming/Syntax/Method_Calls)
