@@ -298,7 +298,7 @@ $
 The word `greeting` will execute the body of the defined method for each
 time it was called.
 
-As a final step we could write a method to do the work of "say greeting five times:"
+We could write a method to do the work of "say greeting five times:"
 
 ```ruby
 def greeting
@@ -316,7 +316,7 @@ end
 say_greeting_five_times
 ```
 
-You should start to see that bigger programs could be build of methods caling
+You should start to see that bigger programs could be build of methods calling
 sub-methods and those sub-methods calling sub-sub-methods &mdash; just like
 we suggested in our example about "getting ready to go to work."
 
