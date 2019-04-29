@@ -12,8 +12,8 @@
 
 _Methods_ are used to bundle one or more activities into a single unit. In
 daily life we do this all the time: "get ready for work" means: "take a shower,
-walk the dog, eat breakfast." But each of _those_ activities are made up of
-other sub-activities, and sub-sub activities.  "Take a shower" involves steps
+walk the dog, eat breakfast." But each of _those_ activities is made up of
+other sub-activities, and sub-sub activities. "Take a shower" involves steps
 like "wash hair" which itself has steps like "wet head under shower", "apply
 shampoo", etc.
 
@@ -42,10 +42,9 @@ puts "Hello World!"
 puts "Hello World!"
 ```
 
-This meets the requirement alright.  Now imagine that later in your program you
+This meets the requirement alright. Now imagine that later in your program you
 want to say "Hello World!" five times _again_. We would have to write "Hello
 World!" five more times.
-
 
 ```ruby
 puts "Hello World!"
@@ -84,7 +83,7 @@ puts message
 ```
 
 Here we made use of a variable to store the message, and didn't change anything
-else.  You should be able to see here that by doing this our code is easier to
+else. You should be able to see here that by doing this our code is easier to
 change. From "Hello World!" we could easily go to "Hola Mundo!" by making _one_
 change versus making _10_ changes.
 
@@ -113,7 +112,6 @@ end
 
 And, once integrated, our code could be much simpler:
 
-
 ```ruby
 def say_hello_world_five_times
   puts "Hello World!"
@@ -126,7 +124,6 @@ end
 say_hello_world_five_times
 # other work
 say_hello_world_five_times
-
 ```
 
 Now, when we use the word `say_hello_world_five_times` in our program, it
@@ -142,7 +139,7 @@ DRY stand for "Don't Repeat Yourself," a basic principle of software development
 aimed at reducing repetition of information. Less code is good: It saves time
 and effort, is easy to maintain, and also reduces the chances of bugs. When we
 see unsophisticated repetition, we want to reach for a form of _abstraction_.
-Creating methods is a common and powerful tool of abstraction.
+Creating methods is a common and powerful tool for abstraction.
 
 > Numerous doctoral research projects have looked at the relationship between
 > lines of code and bugs. It turns out the only significant predictor of fewer
@@ -163,7 +160,7 @@ should begin with a lowercase letter.
 
 The first line of `def say_hello_world` is called the method _signature_, it
 defines the basic properties of the method including the name of the method,
-`greeting`. We'll learn more about the other properties later.  The name of a
+`greeting`. We'll learn more about the other properties later. The name of a
 method should suggest what it does. If you need multiple words, Rubyists use a
 `_` to separate them. Separating words by underscore (`_`) is called
 _snake-case_ (because the shape looks like the words were swallowed up by a
@@ -172,7 +169,7 @@ snake).
 Once you begin a method definition with the `def` keyword, all following lines
 _until_ the method's closing `end` keyword are called the method's _body_ or
 the method's _implementation_. The _implementation_ is the actual code that your
-method will run every time it's called.  It's standard practice to indent the
+method will run every time it's called. It's standard practice to indent the
 body by two spaces.
 
 After multiple bits of work (expressions, variables set and looked up, etc.) we
@@ -181,7 +178,7 @@ must provide an `end` keyword.
 > **TIP**: A good practice is to define the method and then immediately close
 > it with `end` _before_ writing the _body_. Many expressions in Ruby use
 > `do...end` and it can be confusing to keep them all straight. By creating the
-> `def (name)`...`end` "bookends," and _then_ fillig out the implementation, 
+> `def (name)`...`end` "bookends," and _then_ fillig out the implementation,
 > we help prevent possible confusion.
 >
 > ```ruby
@@ -199,7 +196,7 @@ end
 ```
 
 All this work _defines_ a method. It does not _run_ it &mdash; yet. We must
-_define_ it before we can _use_.  Think of it like writing a recipe: writing
+_define_ it before we can _use_. Think of it like writing a recipe: writing
 the recipe does not mean doing the work of preparing the dish. If it were that
 easy, we'd all have much fancier dinners at home!
 
@@ -319,10 +316,9 @@ end
 say_greeting_five_times
 ```
 
-You shoudl start to see that bigger programs could be build of methods caling
+You should start to see that bigger programs could be build of methods caling
 sub-methods and those sub-methods calling sub-sub-methods &mdash; just like
 we suggested in our example about "getting ready to go to work."
-
 
 ## Conclusion
 
@@ -332,6 +328,7 @@ call methods is crucial to building programs, as well as your development as a
 programmer. You'll have to use them often, in big or small programs.
 
 ## Resources
+
 [Ruby Programming/Syntax/Method Calls](https://en.wikibooks.org/wiki/Ruby_Programming/Syntax/Method_Calls)
 [Ruby - Methods](https://www.tutorialspoint.com/ruby/ruby_methods.htm)
 [Ruby Methods](https://www.w3resource.com/ruby/ruby-methods.php)
